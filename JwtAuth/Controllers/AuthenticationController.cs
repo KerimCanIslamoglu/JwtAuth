@@ -107,7 +107,7 @@ namespace JwtAuth.Controllers
 
                 if (isCorrect)
                 {
-                    var jwtToken = GenerateJwtToken(existingUser);
+                    //var jwtToken = GenerateJwtToken(existingUser);
 
                     return Ok(await GenerateJwtToken(existingUser));
                 }
@@ -316,6 +316,7 @@ namespace JwtAuth.Controllers
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    //new Claim(ClaimTypes.Role, "Admin")
                 }),
                 Expires = DateTime.UtcNow.AddSeconds(30), // 5-10 
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
